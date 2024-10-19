@@ -1,0 +1,34 @@
+{
+  "@context": "http://iiif.io/api/presentation/2/context.json",
+  "@id": "https://raw.githubusercontent.com/nokiahg/media/main/manifest.json",
+  "@type": "sc:Manifest",
+  "label": "Mapa do Jardim Botânico - 1809",
+  "sequences": [
+    {
+      "@type": "sc:Sequence",
+      "canvases": [
+        {
+          "@id": "https://raw.githubusercontent.com/nokiahg/media/main/1809-canvas",
+          "@type": "sc:Canvas",
+          "label": "Mapa 1809",
+          "width": 3000,
+          "height": 4000,
+          "images": [
+            {
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "resource": {
+                "@id": "https://raw.githubusercontent.com/nokiahg/media/main/1809.jpeg",
+                "@type": "dctypes:Image",
+                "format": "image/jpeg",
+                "width": 3000,
+                "height": 4000
+              },
+              "on": "https://raw.githubusercontent.com/nokiahg/media/main/1809-canvas"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
