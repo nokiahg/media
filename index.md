@@ -1,20 +1,27 @@
 # Evolução do Jardim Botânico do Rio de Janeiro  
 ## Mapa Interativo: 1809 - 1844 - 2024  
 
-Explore como o Jardim Botânico evoluiu ao longo do tempo utilizando o mapa interativo abaixo.
+Explore a evolução do Jardim Botânico ao longo do tempo utilizando o mapa interativo abaixo.
 
 <div id="map" style="height: 600px;"></div>
 
+<!-- Adicionando as bibliotecas Leaflet.js -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
 <script>
   // Inicializando o mapa com Leaflet.js
-  var map = L.map('map').setView([-22.9711, -43.2247], 16); // Coordenadas do Jardim Botânico
+  var map = L.map('map').setView([-22.9711, -43.2247], 16);
 
   // Adicionando um mapa base (OpenStreetMap)
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
   }).addTo(map);
 
-  // Adicionando camadas dos mapas históricos em JPEG
+  // Adicionando camadas dos mapas históricos
   var map1809 = L.imageOverlay(
     'https://raw.githubusercontent.com/nokiahg/media/main/1809.jpeg',
     [[-22.975, -43.229], [-22.968, -43.218]]
@@ -32,20 +39,19 @@ Explore como o Jardim Botânico evoluiu ao longo do tempo utilizando o mapa inte
 
   // Controle de linha do tempo para alternar entre camadas
   var timeline = {
-    "1809": map1809,
-    "1844": map1844,
-    "2024": map2024
+    '1809': map1809,
+    '1844': map1844,
+    '2024': map2024,
   };
 
-  // Função para alternar entre mapas na linha do tempo
   function changeYear(year) {
     Object.values(timeline).forEach(layer => map.removeLayer(layer));
     timeline[year].addTo(map);
   }
 
-  // Interface da linha do tempo
+  // Interface de controle da linha do tempo
   var timelineControl = L.control({ position: 'topright' });
-  timelineControl.onAdd = function(map) {
+  timelineControl.onAdd = function () {
     var div = L.DomUtil.create('div', 'timeline-control');
     div.innerHTML = `
       <select id="year" onchange="changeYear(this.value)">
@@ -58,5 +64,5 @@ Explore como o Jardim Botânico evoluiu ao longo do tempo utilizando o mapa inte
   timelineControl.addTo(map);
 
   // Inicializando com o mapa de 1809
-  changeYear("1809");
+  changeYear('1809');
 </script>
