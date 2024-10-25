@@ -1,9 +1,11 @@
-# Evolução do Jardim Botânico do Rio de Janeiro  
-## Mapa Interativo: 1809 - 1844 - 2024  
+# Mapa Interativo do Jardim Botânico - 1844  
 
-Explore a evolução do Jardim Botânico ao longo do tempo utilizando o mapa interativo abaixo.
+Explore a evolução do Jardim Botânico e ajuste a transparência do mapa histórico usando o controle deslizante abaixo.
 
-<div id="map" style="height: 600px;"></div>
+<div id="map" style="height: 600px; margin-bottom: 10px;"></div>
+
+<label for="opacityRange">Transparência: </label>
+<input type="range" id="opacityRange" min="0" max="1" step="0.1" value="1">
 
 <!-- Adicionando as bibliotecas Leaflet.js -->
 <link
@@ -13,25 +15,28 @@ Explore a evolução do Jardim Botânico ao longo do tempo utilizando o mapa int
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
 <script>
-  // Inicializando o mapa com Leaflet.js
-  var map = L.map('map').setView([-22.9711, -43.2247], 13); // Coordenadas centrais do Jardim Botânico
+  // Inicializando o mapa
+  var map = L.map('map').setView([-22.9711, -43.2247], 13);
 
-  // Adicionando um mapa base (OpenStreetMap)
+  // Adicionando o mapa base (OpenStreetMap)
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
   }).addTo(map);
 
-  // Adicionando o mapa de 1844 como camada
+  // Adicionando o mapa histórico de 1844 como camada
   var map1844 = L.imageOverlay(
-    'https://raw.githubusercontent.com/nokiahg/media/main/1844.jpeg',
-    [[-22.9314, -43.2706], [-23.0170, -43.1776]] // Coordenadas do mapa
+    'https://raw.githubusercontent.com/nokiahg/media/main/1844_georeferenced.jpeg',
+    [[-22.9314, -43.2706], [-23.0170, -43.1776]],
+    { opacity: 1 } // Começa com opacidade 100%
   );
 
-  // Exibindo o mapa de 1844 na inicialização
+  // Exibir a camada de 1844 no início
   map1844.addTo(map);
-</script>
 
-
-  // Inicializando com o mapa de 1809
-  changeYear('1809');
+  // Controle de Transparência (Slider)
+  var opacityRange = document.getElementById('opacityRange');
+  opacityRange.addEventListener('input', function () {
+    var opacity = parseFloat(this.value); // Converte para número
+    map1844.setOpacity(opacity); // Altera a opacidade da camada
+  });
 </script>
