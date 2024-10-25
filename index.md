@@ -16,7 +16,7 @@ Explore a evolução do Jardim Botânico e ajuste a transparência do mapa hist�
 
 <script>
   // Inicializando o mapa
-  var map = L.map('map').setView([-22.9711, -43.2247], 13);
+  var map = L.map('map').setView([-22.9711, -43.2247], 13); // Coordenadas centrais
 
   // Adicionando o mapa base (OpenStreetMap)
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -26,8 +26,8 @@ Explore a evolução do Jardim Botânico e ajuste a transparência do mapa hist�
   // Adicionando o mapa histórico de 1844 como camada
   var map1844 = L.imageOverlay(
     'https://raw.githubusercontent.com/nokiahg/media/main/1844_georeferenced.jpeg',
-    [[-22.9314, -43.2706], [-23.0170, -43.1776]],
-    { opacity: 1 } // Começa com opacidade 100%
+    [[-22.9314, -43.2706], [-23.0170, -43.1776]], // Coordenadas ajustadas
+    { opacity: 1 } // Inicia com opacidade 100%
   );
 
   // Exibir a camada de 1844 no início
